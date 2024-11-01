@@ -2,13 +2,14 @@
 const fileHandler = require("../util/FileHandler");
 const path = require("path");
 
-const dataPath = path.join( path.dirname(require.main.filename), "data", "Series.js") 
+const dataPath = path.join( path.dirname(require.main.filename), "data", "Series.json") 
 
 class Series {
-    constructor(id,name,img,genre){
+    constructor(id,name,img,videoLink,genre){
         this.id = id;
-        this.naame = name;
+        this.name = name;
         this.img = img,
+        this.videoLink = videoLink,
         this.genre = genre;
     }
 
@@ -16,7 +17,7 @@ class Series {
         fileHandler.GetAllFromFile(dataPath, (series)=>{
 
             if(this.id){
-                const edictProductIndex = series.find( (prod) => prod.id === this.id)
+                const edictProductIndex = series.findIndex( (prod) => prod.id === String(this.id))
                 series[edictProductIndex] = this;
                 fileHandler.SaveDataInFile(dataPath, series);
             }else{
@@ -33,16 +34,15 @@ class Series {
 
     static GetById(id, cb){
         fileHandler.GetAllFromFile(dataPath, (series)=>{
-           const serie = series.find((p) => p.id === id);
+           const serie = series.find((p) => p.id === String(id));
            cb(serie);
         })
     }
 
-    static Delete(id, cb){
+    static Delete(id){
         fileHandler.GetAllFromFile(dataPath, (series)=>{
           const seriesNew =  series.filter((p) => p.id != id);
-          fileHandler.SaveDataInFile(seriesNew)
-
+          fileHandler.SaveDataInFile(dataPath, seriesNew)
         })
     }
 

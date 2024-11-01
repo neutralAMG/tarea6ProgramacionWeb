@@ -6,18 +6,20 @@ const router = express.Router();
 
 const SeriesController = require("../Controllers/SeriesController")
 
-router.get("/index-series", SeriesController.GetAddSeries)
+router.get("/index-series", SeriesController.GetAllSeries)
 
-router.get("/detail-series", SeriesController.GetAddSeries)
+router.get("/MantIndex-series", SeriesController.GetMantSeries)
+
+router.get("/detail-series/:id", SeriesController.GetByISeries)
 
 router.get("/add-series", SeriesController.GetAddSeries)
 
 router.post("/add-series", SeriesController.PostAddSeries)
 
-router.get("/update-series", SeriesController.GetUpdateSeries)
+router.get("/update-series/:id", SeriesController.GetUpdateSeries)
 
-router.get("/update-series", SeriesController.PostAddSeries)
+router.post("/update-series", SeriesController.PostUpddteSeries)
 
-router.get("/delete-series", SeriesController.PostDeleteSeries)
+router.post("/delete-series", SeriesController.PostDeleteSeries)
 
 module.exports = router

@@ -1,0 +1,13 @@
+
+<a href="/Genre/index-genre" class="btn btn-info mb-3">Go back</a>
+
+<form action="/Genre/add-genre" method="POST" onsubmit="return confirm('You sure you want to save this genre?');" class="border p-4 rounded bg-light">
+    <input type="hidden" id="id" name="id" value="{{genre.id}}">
+    
+    <div class="mb-3">
+        <label for="name" class="form-label">Name:</label>
+        <input type="text" id="name" name="name" class="form-control"required>
+    </div>
+    
+    <button type="submit" class="btn btn-primary">save genre</button>
+</form>

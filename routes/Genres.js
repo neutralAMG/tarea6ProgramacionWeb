@@ -8,13 +8,13 @@ const GenresController = require("../Controllers/GenresController");
 
 router.get("/index-genre", GenresController.GetAllGenres);
 
-router.get("/genre-detail/:genreId", GenresController.GetByIdGenres);
+router.get("/genre-detail/:id", GenresController.GetByIdGenres);
 
 router.get("/add-genre", GenresController.GetAddGenres);
 
 router.post("/add-genre", GenresController.PostAddGenres);
 
-router.get("/update-genre:genreId", GenresController.GetUpdateGenres);
+router.get("/update-genre/:id", GenresController.GetUpdateGenres);
 
 router.post("/update-genre", GenresController.PostUpddteGenres);
 

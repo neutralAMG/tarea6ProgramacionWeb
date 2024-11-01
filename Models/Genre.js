@@ -2,19 +2,19 @@
 const fileHandler = require("../util/FileHandler")
 const path = require("path")
 
-const dataPath = path.join(path.dirname(require.main.filename), "data", "Genre.js")
+const dataPath = path.join(path.dirname(require.main.filename), "data", "Genre.json")
 
 class Genre {
     constructor(id,name){
         this.id = id;
-        this.naame = name;
+        this.name = name;
     }
 
     Save(){
         fileHandler.GetAllFromFile(dataPath, (genres)=>{
 
             if(this.id){
-                const edictGenreId = genres.find((ge) => ge.id === this.id )
+                const edictGenreId = genres.findIndex((ge) => ge.id === String(this.id) )
                 genres[edictGenreId] = this;
                 fileHandler.SaveDataInFile(dataPath, genres)
 
@@ -30,16 +30,18 @@ class Genre {
     }
 
     static GetById(id, cb){
-         fileHandler.GetAllFromFile(data, (genres)=>{
-         const genre = genres.find((g) => g.id === id)
-          cb(genre)
+         fileHandler.GetAllFromFile(dataPath, (genre)=>{
+         const genreToReturn = genre.find((g) => g.id === String(id))
+          cb(genreToReturn)
         })
      }
 
-    static Delete(id, cb){
+    static Delete(id){
          fileHandler.GetAllFromFile(dataPath, (genres) =>{
          const genresNew = genres.filter((g) => g.id != id);
-         fileHandler.SaveDataInFile(genresNew)
+         fileHandler.SaveDataInFile(dataPath, genresNew)
         })
      }
 }
+
+module.exports = Genre

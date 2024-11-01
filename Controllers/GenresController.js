@@ -14,7 +14,7 @@ exports.GetAllGenres = (req, res, next) =>{
 }
 
 exports.GetByIdGenres = (req, res, next) =>{
-    const id = req.params.genreId;
+    const id = req.params.id;
 
     genreModel.GetById(id,(genre) =>{
         res.render("GenresView/DetailGenre",{
@@ -26,8 +26,9 @@ exports.GetByIdGenres = (req, res, next) =>{
     
 }
 
+
 exports.GetAddGenres = (req, res, next) =>{
-    res.render("GenresView/AddGenre",{})
+    res.render("GenresView/AddGenres",{})
 }
 
 exports.PostAddGenres = (req, res, next) =>{
@@ -35,13 +36,13 @@ exports.PostAddGenres = (req, res, next) =>{
     const genre = new Genre(null, name)
     genre.Save();
 
-    res.redirect("/")
+    res.redirect("/Genre/index-Genre")
 
 }
 
 exports.GetUpdateGenres = (req, res, next) =>{
 
-    const id = req.params.genreId;
+    const id = req.params.id;
 
     genreModel.GetById(id,(genre) =>{
         res.render("GenresView/UpdateGenre",{
@@ -54,13 +55,15 @@ exports.GetUpdateGenres = (req, res, next) =>{
 }
 
 
+
+
 exports.PostUpddteGenres = (req, res, next) =>{
     const name = req.body.name;
     const id = req.body.id
     const genre = new Genre(id, name)
     genre.Save();
 
-    res.redirect("/")
+    res.redirect("/Genre/index-Genre")
 }
 
 
@@ -70,5 +73,5 @@ exports.PostDeleteGenres = (req, res, next) =>{
  
     genreModel.Delete(id);
 
-    res.redirect("/")
+    res.redirect("/Genre/index-Genre")
 }

@@ -5,8 +5,9 @@ const {engine} = require("express-handlebars")
 const GenresRouter = require("./routes/Genres")
 const SeriesRouter = require("./routes/Series")
 
-
-app.engine("hbs", engine({layoutsDir: "views/layouts/",defaultLayout:"main-layout",extname:"hbs"}));
+app.engine("hbs", engine({helpers:{
+equals: (v1,v2) => v1===v2,
+}, layoutsDir: "views/layouts/",defaultLayout:"main-layout",extname:"hbs"}));
 
 
 
@@ -20,10 +21,10 @@ app.use(express.urlencoded({extended: false}))
 
 
 app.use("/Genre",GenresRouter)
-app.use("/Series ",SeriesRouter)
+app.use("/Series",SeriesRouter)
 app.use(function(req,res,next){
-    res.status(404).send("<h1>404</h1>")
+    res.redirect('/Series/index-series');
 })
 
 
-app.listen(8000);
+app.listen(8001);

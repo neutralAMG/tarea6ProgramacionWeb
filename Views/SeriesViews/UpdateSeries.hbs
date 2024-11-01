@@ -1,0 +1,32 @@
+<a href="/series/index-series" class="btn btn-info mb-3">Go back</a>
+
+<form action="/series/update-series" method="POST" onsubmit="return confirm('You sure you want to save this series?');" class="border p-4 rounded bg-light">
+    <input type="hidden" id="id" name="id" value="{{serie.id}}">
+    
+    <div class="mb-3">
+        <label for="name" class="form-label">Name:</label>
+        <input type="text" id="name" name="name" class="form-control" value="{{serie.name}}" required>
+    </div>
+    
+    <div class="mb-3">
+        <label for="img" class="form-label">Image URL:</label>
+        <input type="url" id="img" name="img" class="form-control" value="{{serie.img}}" required>
+    </div>
+    
+    <div class="mb-3">
+        <label for="videoLink" class="form-label">Video Link:</label>
+        <input type="url" id="videoLink" name="videoLink" class="form-control" value="{{serie.videoLink}}" required>
+    </div>
+    
+    <div class="mb-3">
+        <label for="genre" class="form-label">Genre:</label>
+        <select id="genre" name="genre" class="form-select" required>
+            <option value="">Choose a genre</option> 
+            {{#each genres}}
+                <option value="{{this.name}}" {{#if (equals this.name ../serie.genre)}}selected{{/if}}>{{this.name}}</option>
+            {{/each}}
+        </select>
+    </div>
+    
+    <button type="submit" class="btn btn-primary">Update Series</button>
+</form>

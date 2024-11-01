@@ -1,4 +1,5 @@
 const seriesModel = require("../Models/Series");
+const genreModel = require("../Models/Genre");
 const Serie = require("../Models/Series")
 
 exports.GetAllSeries = (req, res, next) =>{
@@ -15,42 +16,69 @@ seriesModel.GetAll((series) =>{
 
 }
 
+
+exports.GetMantSeries = (req, res, next) =>{
+
+
+    seriesModel.GetAll((series) =>{
+        res.render("SeriesViews/MantIndexSeries",{
+            pageTitle: "",
+            series: series,
+        })
+    })
+    
+  
+}
 exports.GetByISeries= (req, res, next) =>{
 
-    const id = req.params.genreId;
+    const id = req.params.id;
 
-    genreModel.GetById(id,(genre) =>{
-        res.render("SeriesViews/DetailSeries",{
+    seriesModel.GetById(id,(serie) =>{
+     
+          res.render("SeriesViews/DetailSeries",{
             pageTitle: "",
-            genre: genre,
+            serie: serie,
 
         })
+    
+      
     })
     
 }
 
-exports.GetAddSeries = (req, res, next) =>{
-    res.render("SeriesViews/AddSeries",{})
+exports.GetAddSeries = (req, res, next) =>{ 
+    genreModel.GetAll((genres) =>{
+
+    res.render("SeriesViews/AddSeries",{
+        genres:genres
+    }) 
+
+ })
 }
+
 
 exports.PostAddSeries = (req, res, next) =>{
     const name = req.body.name;
-    const img = req.body.name;
-    const genre = req.body.name;
-    const serie = new Serie(null, name,img,genre)
+    const img = req.body.img;
+    const videoLink = req.body.videoLink;
+    const genre = req.body.genre;
+    const serie = new Serie(null, name,img,videoLink,genre)
     serie.Save();
 
-    res.redirect("/")
+    res.redirect("/series/index-series")
 }
 
 exports.GetUpdateSeries = (req, res, next) =>{
 
-    const id = req.params.genreId;
-
-    genreModel.GetById(id,(serie) =>{
+    const id = req.params.id;
+    genreModel.GetAll((genres) =>{
+    seriesModel.GetById(id,(serie) =>{
+        
         res.render("SeriesViews/UpdateSeries",{
             pageTitle: "",
             serie: serie,
+            genres: genres
+             })
         })
     })
     
@@ -61,11 +89,12 @@ exports.PostUpddteSeries = (req, res, next) =>{
     const id = req.body.id
     const name = req.body.name;
     const img = req.body.img;
+    const videoLink = req.body.videoLink;
     const genre = req.body.genre;
-    const serie = new Serie(id, name,img,genre)
+    const serie = new Serie(id, name,img,videoLink,genre)
     serie.Save();
 
-    res.redirect("/")
+    res.redirect("/series/index-series")
 }
 
 
@@ -73,5 +102,5 @@ exports.PostDeleteSeries = (req, res, next) =>{
     const id = req.body.id;
 
     seriesModel.Delete(id);
-    res.redirect("/")
+    res.redirect("/series/index-series")
 }
