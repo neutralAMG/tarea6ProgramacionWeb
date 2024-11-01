@@ -1,4 +1,4 @@
-<a href="/series/index-series" class="btn btn-info mb-3">Go back</a>
+
 
 <form action="/series/update-series" method="POST" onsubmit="return confirm('You sure you want to save this series?');" class="border p-4 rounded bg-light">
     <input type="hidden" id="id" name="id" value="{{serie.id}}">
@@ -27,6 +27,6 @@
             {{/each}}
         </select>
     </div>
-    
+    <a href="/series/MantIndex-series" class="btn btn-info ">Go back</a>
     <button type="submit" class="btn btn-primary">Update Series</button>
 </form>

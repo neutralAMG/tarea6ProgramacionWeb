@@ -1,4 +1,21 @@
 
+<form action="/series/filter-name" method="POST">
+<input type="text" id="name" name="name">
+<button type="submit">Filter name</button>
+</form>
+
+<form action="/series/filter-genre" method="POST">
+    <div class="mb-3">
+        <label for="genre" class="form-label">Genre:</label>
+        <select id="genre" name="genre" class="form-select" required>
+            <option value="">Choose a genre</option> 
+            {{#each genres}}
+                <option value="{{this.name}}" {{#if (equals this.name ../serie.genre)}}selected{{/if}}>{{this.name}}</option>
+            {{/each}}
+        </select>
+    </div>
+    <button type="submit">Filter genre</button>
+</form>
 {{#if IsEmpty}}
     <h1 class="text-center">There is no series</h1>
 {{else}}
@@ -21,3 +38,5 @@
         {{/each}}
     </div>
 {{/if}}
+
+

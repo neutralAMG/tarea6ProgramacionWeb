@@ -39,6 +39,20 @@ class Series {
         })
     }
 
+    static GetByName(name, cb){
+        fileHandler.GetAllFromFile(dataPath, (series)=>{
+           const seriess = series.find((p) => p.name === String(name));
+           cb(seriess);
+        })
+    }
+
+    static GetByGenera(genre, cb){
+        fileHandler.GetAllFromFile(dataPath, (series)=>{
+           const seriess = series.filter((p) => p.genre === String(genre));
+           cb(seriess);
+        })
+    }
+
     static Delete(id){
         fileHandler.GetAllFromFile(dataPath, (series)=>{
           const seriesNew =  series.filter((p) => p.id != id);

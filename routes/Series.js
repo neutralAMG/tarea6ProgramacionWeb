@@ -10,6 +10,10 @@ router.get("/index-series", SeriesController.GetAllSeries)
 
 router.get("/MantIndex-series", SeriesController.GetMantSeries)
 
+router.post("/filter-name", SeriesController.filterByName);
+
+router.post("/filter-genre", SeriesController.filterByGeneres);
+
 router.get("/detail-series/:id", SeriesController.GetByISeries)
 
 router.get("/add-series", SeriesController.GetAddSeries)

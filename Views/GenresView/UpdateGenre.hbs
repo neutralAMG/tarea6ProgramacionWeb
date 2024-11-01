@@ -1,5 +1,5 @@
 
-<a href="/Genre/index-genre" class="btn btn-info mb-3">Go back</a>
+
 
 <form action="/Genre/update-genre" method="POST" onsubmit="return confirm('You sure you want to update this genre?');" class="border p-4 rounded bg-light">
     <input type="hidden" id="id" name="id" value="{{genre.id}}">
@@ -8,6 +8,6 @@
         <label for="name" class="form-label">Name:</label>
         <input type="text" id="name" name="name" class="form-control" value="{{genre.name}}" required>
     </div>
-    
+    <a href="/Genre/index-genre" class="btn btn-info">Go back</a>
     <button type="submit" class="btn btn-primary">Update genre</button>
 </form>
